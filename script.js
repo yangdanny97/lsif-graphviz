@@ -1,12 +1,26 @@
 let buildLabel = obj => {
     let specials = ["label", "type", "id", "inV", "outV", "inVs"];
-    let body = [`[${obj.id}] ${obj.label}`];
-    for (const prop in obj) {
-        if (specials.includes(prop)) {
-            continue;
+    var body = [`[${obj.id}] ${obj.label}`];
+    let handleProps = obj => {
+        var body = [];
+        for (const prop in obj) {
+            if (specials.includes(prop)) {
+                continue;
+            }
+            if (typeof obj[prop] === "object") {
+                if (obj[prop].line !== undefined && obj[prop].character !== undefined) {
+                    body.push(`${prop}: ${obj[prop].line}:${obj[prop].character}`);
+                } else {
+                    body.push(`${prop}:`);
+                    body = body.concat(handleProps(obj[prop]).map(x => "  " + x));
+                }
+            } else {
+                body.push(`${prop}: ${obj[prop]}`);
+            }
         }
-        body.push(`${prop}: ${obj[prop]}`);
+        return body;
     }
+    body = body.concat(handleProps(obj));
     return `\"${body.join("\n")}\"`;
 }
 
