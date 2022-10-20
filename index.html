@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<body>
+    <script src="//d3js.org/d3.v5.min.js"></script>
+    <script src="https://unpkg.com/@hpcc-js/wasm@0.3.11/dist/index.min.js"></script>
+    <script src="https://unpkg.com/d3-graphviz@3.0.5/build/d3-graphviz.js"></script>
+    <div id="graph" style="text-align: center; margin: 50px; border: 1px; display: flex;"></div>
+    <div style="display: flex;">
+        <div style="flex: 1;">
+            <textarea id="input" name="Input" rows="30" cols="100">
+{"id":1,"label":"project","kind":"foolang","type":"vertex","name":"foolang"}
+{"id":42,"label":"$event","kind":"begin","type":"vertex","scope":"project","data":1}
+{"id":43,"label":"$event","kind":"begin","type":"vertex","scope":"document","data":3}
+{"id":44,"label":"$event","kind":"begin","type":"vertex","scope":"document","data":2}
+{"id":3,"label":"document","languageId":"foolang","type":"vertex","uri":"file1.foo"}
+{"id":2,"label":"document","languageId":"foolang","type":"vertex","uri":"file2.foo"}
+{"id":4,"label":"range","end":{"line":5,"character":4},"type":"vertex","start":{"line":5,"character":3}}
+{"id":22,"label":"range","end":{"line":9,"character":4},"type":"vertex","start":{"line":9,"character":3}}
+{"id":10,"label":"range","end":{"line":8,"character":4},"type":"vertex","start":{"line":8,"character":3}}
+{"id":16,"label":"range","end":{"line":15,"character":6},"type":"vertex","start":{"line":15,"character":5}}
+{"id":28,"label":"range","end":{"line":12,"character":4},"type":"vertex","start":{"line":12,"character":3}}
+{"id":34,"label":"range","end":{"line":20,"character":32},"type":"vertex","start":{"line":20,"character":24}}
+{"id":36,"label":"range","end":{"line":20,"character":40},"type":"vertex","start":{"line":20,"character":33}}
+{"id":38,"label":"range","end":{"line":20,"character":48},"type":"vertex","start":{"line":20,"character":40}}
+{"id":40,"label":"range","end":{"line":23,"character":30},"type":"vertex","start":{"line":23,"character":23}}
+{"outV":3,"id":45,"label":"contains","type":"edge","inVs":[4,22]}
+{"outV":2,"id":46,"label":"contains","type":"edge","inVs":[10,16,28,34,36,38,40]}
+{"id":23,"type":"vertex","label":"resultSet"}
+{"id":24,"type":"vertex","label":"definitionResult"}
+{"outV":22,"id":25,"label":"next","type":"edge","inV":23}
+{"outV":24,"id":26,"label":"item","shard":3,"type":"edge","inVs":[22]}
+{"outV":23,"id":27,"label":"textDocument\/definition","type":"edge","inV":24}
+{"id":5,"type":"vertex","label":"resultSet"}
+{"id":6,"type":"vertex","label":"definitionResult"}
+{"outV":4,"id":7,"label":"next","type":"edge","inV":5}
+{"outV":6,"id":8,"label":"item","shard":3,"type":"edge","inVs":[4]}
+{"outV":5,"id":9,"label":"textDocument\/definition","type":"edge","inV":6}
+{"id":29,"type":"vertex","label":"resultSet"}
+{"id":30,"type":"vertex","label":"definitionResult"}
+{"outV":28,"id":31,"label":"next","type":"edge","inV":29}
+{"outV":30,"id":32,"label":"item","shard":2,"type":"edge","inVs":[28]}
+{"outV":29,"id":33,"label":"textDocument\/definition","type":"edge","inV":30}
+{"id":17,"type":"vertex","label":"resultSet"}
+{"id":18,"type":"vertex","label":"definitionResult"}
+{"outV":16,"id":19,"label":"next","type":"edge","inV":17}
+{"outV":18,"id":20,"label":"item","shard":2,"type":"edge","inVs":[16]}
+{"outV":17,"id":21,"label":"textDocument\/definition","type":"edge","inV":18}
+{"id":11,"type":"vertex","label":"resultSet"}
+{"id":12,"type":"vertex","label":"definitionResult"}
+{"outV":10,"id":13,"label":"next","type":"edge","inV":11}
+{"outV":12,"id":14,"label":"item","shard":2,"type":"edge","inVs":[10]}
+{"outV":11,"id":15,"label":"textDocument\/definition","type":"edge","inV":12}
+{"outV":38,"id":39,"label":"next","type":"edge","inV":5}
+{"outV":36,"id":37,"label":"next","type":"edge","inV":17}
+{"outV":40,"id":41,"label":"next","type":"edge","inV":17}
+{"outV":34,"id":35,"label":"next","type":"edge","inV":11}
+{"id":47,"label":"$event","kind":"end","type":"vertex","scope":"document","data":3}
+{"id":48,"label":"$event","kind":"end","type":"vertex","scope":"document","data":2}
+{"id":49,"label":"$event","kind":"end","type":"vertex","scope":"project","data":1}
+            </textarea>
+            <button id="submit">Submit</button>
+        </div>
+        <div style="flex: 1;">
+            <textarea id="output" name="Output" rows="30" cols="80"></textarea>
+        </div>
+    </div>
+    <script src="./script.js"></script>
+</body>
